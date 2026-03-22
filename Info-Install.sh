@@ -1,6 +1,6 @@
 #!/bin/bash
 
-SCRIPT_VERSION="1.0.6"
+SCRIPT_VERSION="1.0.7"
 
 BASE_DIR="/usr/local/autoinstall"
 INSTALLED_FLAG="$BASE_DIR/.installed"
@@ -72,15 +72,17 @@ get_remote_version() {
     curl -s --max-time 5 "$REMOTE_VERSION_URL" | tr -d ' \n\r'
 }
 
+dversion(){
+    clear
+    curl -L "$REMOTE_PACKAGE_URL" -o "$TMP_PACKAGE"
+}
+
 install_package() {
 (
-    echo 10
-    curl -L -s "$REMOTE_PACKAGE_URL" -o "$TMP_PACKAGE"
-
-    echo 40
+    echo 20
     rm -rf "$INSTALL_DIR/install"
 
-    echo 70
+    echo 50
     tar -xzf "$TMP_PACKAGE" -C "$INSTALL_DIR"
 
     echo 90
@@ -113,6 +115,7 @@ initial_install() {
 ) | dialog --title "InfoInstall" --gauge "Instalando dependencias iniciales" 8 50 0
 
     ensure_local_version
+    dversion
     install_package
 }
 
@@ -130,6 +133,7 @@ check_update() {
         ask_update "Nueva version disponible $REMOTE_VERSION\nVersion actual $LOCAL_VERSION\n\nDesea actualizar?"
         if [ $? -eq 0 ]; then
             msg_auto "Actualizando sistema"
+            dversion
             install_package
             echo "$REMOTE_VERSION" > "$VERSION_FILE"
         fi
@@ -139,6 +143,7 @@ check_update() {
 main_menu() {
     if [ -d /opt/install ]; then
         cd /opt/install && ./autoinstall.sh
+        cd ..
     else
         msg_auto "Menu no disponible"
     fi
