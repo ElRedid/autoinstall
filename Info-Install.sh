@@ -1,6 +1,6 @@
 #!/bin/bash
 
-SCRIPT_VERSION="1.0.7"
+SCRIPT_VERSION="1.01.0"
 
 BASE_DIR="/usr/local/autoinstall"
 INSTALLED_FLAG="$BASE_DIR/.installed"

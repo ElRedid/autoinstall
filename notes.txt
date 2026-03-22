@@ -1,3 +1,7 @@
+VERSION=1.01.0
+DATE=2026-03-22
+NOTES= Ajuste menor y salida a produccion
+-----
 VERSION=1.0.7
 DATE=2026-03-22
 NOTES= Modificacion de seña para usuarios en mariadb, modificacion en metodo descarga version
