@@ -1,3 +1,7 @@
+VERSION=1.01.1
+DATE=2026-08-08
+NOTES= Ajuste menu impresora
+-----
 VERSION=1.01.0
 DATE=2026-03-22
 NOTES= Ajuste menor y salida a produccion
